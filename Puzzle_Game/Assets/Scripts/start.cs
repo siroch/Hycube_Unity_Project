@@ -19,7 +19,7 @@ public class start : MonoBehaviour
     // Update is called once per frame
     public void start_Game()
     {
-        SceneManager.LoadScene("Selcet_Stage");
+        SceneManager.LoadScene("Select_Stage");
     }
 
     public void go_option()
