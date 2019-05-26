@@ -26,4 +26,10 @@ public class start : MonoBehaviour
     {
         SceneManager.LoadScene("Option");
     }
+    public void game_quit()
+    {
+        print("quit");
+        Application.Quit(
+           );
+    }
 }
