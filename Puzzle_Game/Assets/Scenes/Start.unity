@@ -189,7 +189,6 @@ GameObject:
   - component: {fileID: 800721453}
   - component: {fileID: 800721452}
   - component: {fileID: 800721451}
-  - component: {fileID: 800721454}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -261,18 +260,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &800721454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 800721450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 397882e23fe17429ebd95c38f60cb109, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &979241841
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +330,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\uC2DC\uC791"
 --- !u!222 &979241844
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -363,6 +350,7 @@ GameObject:
   - component: {fileID: 1023476530}
   - component: {fileID: 1023476533}
   - component: {fileID: 1023476532}
+  - component: {fileID: 1023476534}
   - component: {fileID: 1023476531}
   m_Layer: 5
   m_Name: option
@@ -431,12 +419,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 800721450}
-        m_MethodName: 
+      - m_Target: {fileID: 1023476534}
+        m_MethodName: go_option
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -481,6 +469,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023476529}
   m_CullTransparentMesh: 0
+--- !u!114 &1023476534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023476529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397882e23fe17429ebd95c38f60cb109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1227367919
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,7 +551,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\uC635\uC158"
 --- !u!222 &1227367922
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -671,6 +671,7 @@ GameObject:
   - component: {fileID: 2072962574}
   - component: {fileID: 2072962577}
   - component: {fileID: 2072962576}
+  - component: {fileID: 2072962578}
   - component: {fileID: 2072962575}
   m_Layer: 5
   m_Name: selcet_stage
@@ -739,8 +740,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 800721454}
-        m_MethodName: destroy_me
+      - m_Target: {fileID: 2072962578}
+        m_MethodName: start_Game
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -789,3 +790,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072962573}
   m_CullTransparentMesh: 0
+--- !u!114 &2072962578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072962573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397882e23fe17429ebd95c38f60cb109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
