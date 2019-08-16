@@ -14,12 +14,13 @@ public class BoardManager : MonoBehaviour
     public Transform TileHolder2;
     private List<Vector3> gridPos = new List<Vector3>();
 
-    public bool[,] CheckBoard = new bool[,] { { false, false, false, false, false, false },
-                                              { false, false, false, false, false, false },
-                                              { false, false, false, false, false, false },
-                                              { false, false, false, false, false, false },
-                                              { false, false, false, false, false, false },
-                                              { false, false, false, false, false, false } };
+    // tile1은 true, tile2는 false
+    public static bool[,] CheckBoard = new bool[6, 6] { { false, false, false, false, false, false },
+                                                        { false, false, false, false, false, false },
+                                                        { false, false, false, false, false, false },
+                                                        { false, false, false, false, false, false },
+                                                        { false, false, false, false, false, false },
+                                                        { false, false, false, false, false, false } };
 
     void InitializeList() // gridPos를 비워놓기 위한 함수, 리스트 초기화
     {
@@ -57,7 +58,6 @@ public class BoardManager : MonoBehaviour
 
                 GameObject toInstantiate = Resources.Load("Prefabs/Tile1") as GameObject;
                 GameObject instance = Instantiate(toInstantiate, ranPos, Quaternion.identity) as GameObject;
-
 
                 instance.transform.SetParent(TileHolder1);
             }

@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public BoardManager BoardScript;
-    public bool[,] CheckBoard;
+    public bool[,] CheckBoard = new bool[6, 6];
 
     private GameObject target;      // 클릭한 타일
     private GameObject DirTarget;   // 클릭한 타일에서 상, 하, 좌, 우의 타일
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     {
         BoardScript = GetComponent<BoardManager>();
         target = GetComponent<GameObject>();
-        CheckBoard = BoardScript.CheckBoard;
+        CheckBoard = BoardManager.CheckBoard;
         InitGame();
     }
 
@@ -26,9 +27,10 @@ public class GameManager : MonoBehaviour
     void Update() // 매 프레임마다 화면의 상태를 업데이트 해줌
     {
         GetClickedObj();
+        AllCheckTile();
     }
 
-    private void GetClickedObj()
+    private void GetClickedObj() // 클릭해서 타일을 바꾸는 함수
     {
         if(Input.GetMouseButtonDown(0))
         {
@@ -43,47 +45,99 @@ public class GameManager : MonoBehaviour
                 target = hit.collider.gameObject;
                 Vector3 targetPos = target.transform.position;
 
-                ChangeTile(targetPos);
+                ChangeTile(targetPos, target);
+                GetDirTile(targetPos);
             }
         }
     }
 
-    void ChangeTile(Vector3 tPos)
+    void ChangeTile(Vector3 tPos, GameObject SelectedTile) // 인자는 클릭된 타일의 좌표, 클릭된 타일
     {
-        if (target.name.Equals("Tile1(Clone)"))
+        int x = (int)tPos.x;
+        int y = 6 - (int)tPos.y - 1;
+
+        if (SelectedTile.name.Equals("Tile1(Clone)"))
         {
             Transform TileHolder2 = BoardScript.TileHolder2;
             GameObject toInstantiate = Resources.Load("Prefabs/Tile2") as GameObject;
 
             GameObject instance = Instantiate(toInstantiate, tPos, Quaternion.identity) as GameObject;
 
+            CheckBoard[y, x] = false;
+
             instance.transform.SetParent(TileHolder2);
         }
-        else if(target.name.Equals("Tile2(Clone)"))
+        else if(SelectedTile.name.Equals("Tile2(Clone)"))
         {
             Transform TileHolder1 = BoardScript.TileHolder1;
             GameObject toInstantiate = Resources.Load("Prefabs/Tile1") as GameObject;
 
             GameObject instance = Instantiate(toInstantiate, tPos, Quaternion.identity) as GameObject;
 
+            CheckBoard[y, x] = true;
+
             instance.transform.SetParent(TileHolder1);
         }
-        Destroy(target);
+        Destroy(SelectedTile);
     }
 
-    void GetDirTile(Vector3 tPos)
+    void GetDirTile(Vector3 tPos) // 인자는 클릭된 타일의 좌표, 얘는 상, 하, 좌, 우의 타일들의 정보를 가져오는 함수
     {
-
         int[,] dir = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+        bool onSelect = false;
 
         for(int i=0; i<4; i++)
         {
             Vector3 nPos = new Vector3(tPos.x + dir[i, 0], tPos.y + dir[i, 1], 0f);
+            GameObject[] Tiles = GameObject.FindGameObjectsWithTag("Tile");
 
             if((-0.5 <= nPos.x && nPos.x <= 6.5) && (-0.5 <= nPos.y && nPos.y <= 6.5))
             {
-
+                foreach(GameObject t in Tiles)
+                {
+                    Vector3 stPos = t.transform.position;
+                    if((stPos.x - 0.5 <= nPos.x && nPos.x <= stPos.x + 0.5) &&
+                        (stPos.y - 0.5 <= nPos.y && nPos.y <= stPos.y + 0.5))
+                    {
+                        DirTarget = t;
+                        onSelect = true;
+                    }
+                }
             }
+
+            if(onSelect)
+            {
+                ChangeTile(DirTarget.transform.position, DirTarget);
+                onSelect = false;
+            }
+        }
+    }
+
+    void AllCheckTile()
+    {
+        bool Done = true;
+        bool first = CheckBoard[0, 0];
+
+        for(int i=0; i<6; i++)
+        {
+            for(int j=0; j<6; j++)
+            {
+                if(first != CheckBoard[i, j])
+                {
+                    Done = false;
+                    break;
+                }
+            }
+            if(!Done)
+            {
+                break;
+            }
+        }
+
+        if(Done)
+        {
+            Debug.Log("Finished Game!!!");
+            SceneManager.LoadScene("End");
         }
     }
 }
