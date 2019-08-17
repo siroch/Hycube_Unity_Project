@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class BoardManager : MonoBehaviour
+public class ExpBoardManager : MonoBehaviour
 {
     public int columns = 6;
     public int rows = 6;
@@ -46,22 +45,31 @@ public class BoardManager : MonoBehaviour
     {
         TileHolder1 = new GameObject("Tile1").transform;
 
-        for (int i = 0; i < tileCount1; )
+        Vector3 mainPos = new Vector3(2, 2, 0f);
+        int[,] Dir = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+
+        int xx = 2;
+        int yy = 6 - 2 - 1;
+
+        GameObject ins = Resources.Load("Prefabs/Tile1") as GameObject;
+        GameObject instance = Instantiate(ins, mainPos, Quaternion.identity) as GameObject;
+
+        instance.transform.SetParent(TileHolder1);
+        CheckBoard[yy, xx] = true;
+
+        for (int i = 0; i < tileCount1; i++)
         {
-            Vector3 ranPos = RandomPosition();
-            int x = (int)ranPos.x;
-            int y = rows - (int)ranPos.y - 1;
+            int x = (int)mainPos.x + Dir[i, 0];
+            int y = (int)mainPos.y + Dir[i, 1];
+            Vector3 npos = new Vector3(x, y, 0f);
 
-            if(CheckBoard[y, x] == false)
-            {
-                CheckBoard[y, x] = true;
+            xx = x;
+            yy = 6 - y - 1;
+            CheckBoard[yy, xx] = true;
 
-                GameObject toInstantiate = Resources.Load("Prefabs/Tile1") as GameObject;
-                GameObject instance = Instantiate(toInstantiate, ranPos, Quaternion.identity) as GameObject;
+            instance = Instantiate(ins, npos, Quaternion.identity) as GameObject;
 
-                instance.transform.SetParent(TileHolder1);
-                i++;
-            }
+            instance.transform.SetParent(TileHolder1);
         }
     }
 
@@ -71,9 +79,9 @@ public class BoardManager : MonoBehaviour
 
         for (int i = 0; i < columns; i++)
         {
-            for(int j = 0; j < rows; j++)
+            for (int j = 0; j < rows; j++)
             {
-                if(CheckBoard[i, j] == false)
+                if (CheckBoard[i, j] == false)
                 {
                     int x = j;
                     int y = rows - i - 1;

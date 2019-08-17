@@ -10,7 +10,6 @@ public class PrintDebug : MonoBehaviour
 
     public void PrintBoard()
     {
-        CheckBoard = BoardManager.CheckBoard;
         Debug.Log(Count + " ---------------------------------------");
         Count++;
         for(int i=5; i>=0; i--)
