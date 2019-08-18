@@ -7,7 +7,7 @@ public class start : MonoBehaviour
 {
     public void start_Game()
     {
-        SceneManager.LoadScene("Select_Stage");
+        SceneManager.LoadScene("InGame");
     }
 
     public void go_option()

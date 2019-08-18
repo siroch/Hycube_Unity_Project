@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
         foreach(GameObject t in Tiles)
         {
             Vector3 pos = t.transform.position;
-            Debug.Log(t.name);
 
             int x = (int)pos.x;
             int y = 5 - (int)pos.y;
@@ -141,7 +140,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void AllCheckTile()
+    void AllCheckTile() // 게임을 끝낼만한 조건을 갖췄는지
     {
         bool Done = true;
         bool first = CheckBoard[0, 0];
@@ -169,7 +168,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void BoardReset()
+    public void BoardReset() // reset버튼을 눌렀을때 보드가 처음 상태로 돌아감
     {
         GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
 
