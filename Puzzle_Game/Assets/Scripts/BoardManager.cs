@@ -7,8 +7,9 @@ public class BoardManager : MonoBehaviour
 {
     public int columns = 6;
     public int rows = 6;
-    public int tileCount1 = 18;
-    public int tileCount2 = 18;
+    private int tileCount1 = StageManager.CallStage;
+
+    private bool Difficulty = SceneChanger.Difficulty; // 난이도가 뭔지
 
     public static Transform TileHolder1;
     public static Transform TileHolder2;
@@ -24,6 +25,7 @@ public class BoardManager : MonoBehaviour
 
     void InitializeList() // gridPos를 비워놓기 위한 함수, 리스트 초기화
     {
+        Debug.Log(Difficulty);
         gridPos.Clear();
 
         for (int i = 0; i < columns; i++)
@@ -65,7 +67,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    void FilltheTile2(int level)
+    void FilltheTile2()
     {
         TileHolder2 = new GameObject("Tile2").transform;
 
@@ -91,6 +93,6 @@ public class BoardManager : MonoBehaviour
     {
         InitializeList();
         FilltheTile1();
-        FilltheTile2(tileCount2);
+        FilltheTile2();
     }
 }
